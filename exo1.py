@@ -64,18 +64,26 @@ def kmeans(data, k, t, maxiter) :
 			valeur = tmp[0][1]
 			dict_result[tuple(element)] = cle
 			classes[cle].append(element)
-		pprint(classes)
+		#pprint(classes)
 		for classe in range(k):
-			print("classe : ",classes[classe])
-			finale[i] = moyenne_element(classes[classe],k)
+			finale[classe] = moyenne_element(classes[classe],k)
 		taux_Erreur = 0.0
 		for element in data:
-			print("valeur moyenne ; ",dict_result[tuple(element)]," point actuel",element)
+			#print("valeur moyenne ; ",dict_result[tuple(element)]," point actuel",element)
 			taux_Erreur += distance(finale[dict_result[tuple(element)]],element)
 		error  = abs(taux_Erreur-error)
-		print("taux derrrr",error)
-    print("dict",dict_result)
-		
+		#print("taux derrrr",error)
+    tab1 = []
+    for element in dict_result:
+		 tab1.append((list(element),dict_result[element]))
+    tab2 = []
+    for element in finale:
+         tab2.append((list(finale[element])))
+    return 	(tab1,tab2)
 		
 
 res = kmeans(data, 3, 1, 12)
+
+
+print(res)
+
