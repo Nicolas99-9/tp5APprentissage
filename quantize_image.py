@@ -14,9 +14,9 @@ from kmeans import kmeans
 from colorDist import *
 
 # Parameters
-in_filename = "sea.png"
-n_samples = 3000  # number of points to consider to learn the quantification
-n_colors = 5 # number of colors in the quantified image
+in_filename = "Above_Gotham.png"
+n_samples = 10000  # number of points to consider to learn the quantification
+n_colors = 3 # number of colors in the quantified image
 use_perceptualColorDistance = False  # Otherwise, use eucleadean distance.
 verbose_error = True  # error is printed at each iteration of the k-means if set to True
 maxerr = 0.001  # first stopping criteria for k-means
