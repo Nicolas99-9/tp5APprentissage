@@ -15,12 +15,12 @@ from colorDist import *
 
 # Parameters
 in_filename = "sea.png"
-n_samples = 2000  # number of points to consider to learn the quantification
-n_colors = 16  # number of colors in the quantified image
+n_samples = 3000  # number of points to consider to learn the quantification
+n_colors = 5 # number of colors in the quantified image
 use_perceptualColorDistance = False  # Otherwise, use eucleadean distance.
 verbose_error = True  # error is printed at each iteration of the k-means if set to True
 maxerr = 0.001  # first stopping criteria for k-means
-maxiter = 20  # maximum number of iterations in the k-means
+maxiter = 25  # maximum number of iterations in the k-means
 
 
 def quantize(data, palette_short):
@@ -44,6 +44,7 @@ if __name__ == "__main__":
     out_filename = "_".join([str(in_name),
                              str(n_samples),
                              str(n_colors),
+                             str(maxiter),
                              ext]) + ".png"
 
     im = Image.open(in_filename)
