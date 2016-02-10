@@ -29,7 +29,6 @@ def distance (x,y) :
 
 def moyenne_element(liste,k):
     taille = len(liste)
-    print("MA liste : ",liste)
     finale = [0 for i in range(len(liste[0]))]
     for element in liste:
         finale = np.add(finale,element)
@@ -38,6 +37,9 @@ def moyenne_element(liste,k):
     return finale
 
 def kmeans(data, k, t, maxiter) :
+    '''for i in range(len(data)):
+        data[i] = list(data[i])'''
+    print(data)
     points = choose_initiale(data, k)
     count = 0
     dict_result = {}
@@ -47,44 +49,49 @@ def kmeans(data, k, t, maxiter) :
     for point in data :
         dict_result[tuple(point)] = -1
     for i in range(len(points)):
-		dict_result[tuple(points[i])] = i
-		finale[i] = points[i] 
+        dict_result[tuple(points[i])] = i
+        finale[i] = points[i] 
     error = 9999
     nbIter = 1
     while(error>t and nbIter < maxiter):
-		nbIter+= 1
-		classes = {}
-		for i in range(k):
-			classes[i] = []
-		for element in data:
-			tmp = {}
-			for classe in range(k):
-				tmp[classe] = distance(finale[classe],element)
-			tmp = sortes(tmp)
-			cle = tmp[0][0]
-			valeur = tmp[0][1]
-			dict_result[tuple(element)] = cle
-			classes[cle].append(element)
+        nbIter+= 1
+        classes = {}
+        for i in range(k):
+            classes[i] = []
+        for element in data:
+            tmp = {}
+            for classe in range(k):
+                #print("debug ", distance(finale[classe],element), classe , element, finale[classe])
+                tmp[classe] = distance(finale[classe],element)
+                #print(tmp)
+            tmp = sortes(tmp)
+            cle = tmp[0][0]
+            valeur = tmp[0][1]
+            #print("la cle :",cle)
+            dict_result[tuple(element)] = cle
+            #print("MMMMMMMMMMMMMMMMMMMMM",dict_result)
+            classes[cle].append(element)
+            #print("mes classes,",classes)
 		#pprint(classes)
-		for classe in range(k):
-			finale[classe] = moyenne_element(classes[classe],k)
-		taux_Erreur = 0.0
-		for element in data:
+        for classe in range(k):
+            finale[classe] = moyenne_element(classes[classe],k)
+        taux_Erreur = 0.0
+        for element in data:
 			#print("valeur moyenne ; ",dict_result[tuple(element)]," point actuel",element)
-			taux_Erreur += distance(finale[dict_result[tuple(element)]],element)
-		error  = abs(taux_Erreur-error)
+            taux_Erreur += distance(finale[dict_result[tuple(element)]],element)
+        error  = abs(taux_Erreur-error)
 		#print("taux derrrr",error)
     tab1 = []
     for element in dict_result:
-		 tab1.append((list(element),dict_result[element]))
+        tab1.append((list(element),dict_result[element]))
     tab2 = []
     for element in finale:
-         tab2.append((list(finale[element])))
+        tab2.append((list(finale[element])))
     return 	(tab1,tab2)
 		
 
-res = kmeans(data, 2, 1, 12)
+#res = kmeans(data, 2, 1, 12)
 
 
-print(res)
+#print(res)
 

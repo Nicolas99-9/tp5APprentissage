@@ -4,7 +4,7 @@ import os
 from random import sample
 from time import clock
 # PIL Library
-import Image
+from PIL import Image
 
 # You have to implement the k-means algorithm in a function kmeans
 # in a file kmeans.py
@@ -26,8 +26,7 @@ maxiter = 20  # maximum number of iterations in the k-means
 def quantize(data, palette_short):
     out_data = []
     for rgb in data:
-        closest_col = min(enumerate(palette_short),
-                          key=lambda (pos, col): perceptualColorDistance(col, rgb))
+        closest_col = min(enumerate(palette_short),key=lambda (pos, col): perceptualColorDistance(col, rgb))
         out_data.append(closest_col[0])
     return out_data
 
@@ -53,9 +52,7 @@ if __name__ == "__main__":
         im = im.convert(mode='RGB')
 
     data = im.getdata()
-
-    points = sample(data, n_samples)
-
+    points = sample(list(data), n_samples)
     # create features vectors
     pointsFP = [tuple(comp / 255.0 for comp in point) for point in points]
 
@@ -80,3 +77,9 @@ if __name__ == "__main__":
     out_data = quantize(data, palette_short)
     im_out.putdata(out_data)
     im_out.save(out_filename)
+
+
+#true color => 255 *255 * 255 nuances possible
+# on a besoin de 8 bits pour coder une valeur entre 0 et 255, donc 3 octets par pixels
+# taille d une image 100*100 => 10000*3 octets => 30 000 octets  => 240 000 bits
+# 32 couleurs differentes => 15 bits par pixel => 150 000 bits
