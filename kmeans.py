@@ -27,9 +27,9 @@ def sortes(ma_list):
 def distance (x,y) :
 	return np.linalg.norm(np.array(x) - np.array(y))
 
-def moyenne_element(liste,k):
+def moyenne_element(liste,k,taille):
     taille = len(liste)
-    finale = [0 for i in range(len(liste[0]))]
+    finale = [0 for i in range(taille)]
     for element in liste:
         finale = np.add(finale,element)
     for i in range(len(finale)):
@@ -39,7 +39,7 @@ def moyenne_element(liste,k):
 def kmeans(data, k, t, maxiter) :
     '''for i in range(len(data)):
         data[i] = list(data[i])'''
-    print(data)
+    taille = len(data[0])
     points = choose_initiale(data, k)
     count = 0
     dict_result = {}
@@ -74,7 +74,7 @@ def kmeans(data, k, t, maxiter) :
             #print("mes classes,",classes)
 		#pprint(classes)
         for classe in range(k):
-            finale[classe] = moyenne_element(classes[classe],k)
+            finale[classe] = moyenne_element(classes[classe],k,taille)
         taux_Erreur = 0.0
         for element in data:
 			#print("valeur moyenne ; ",dict_result[tuple(element)]," point actuel",element)
